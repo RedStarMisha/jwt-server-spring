@@ -2,6 +2,7 @@ package dev.struchkov.example.jwt.server.controller;
 
 import dev.struchkov.example.jwt.server.domain.JwtResponse;
 import dev.struchkov.example.jwt.server.domain.RefreshJwtRequest;
+import dev.struchkov.example.jwt.server.domain.User;
 import dev.struchkov.example.jwt.server.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import dev.struchkov.example.jwt.server.domain.JwtRequest;
@@ -23,6 +24,12 @@ public class AuthController {
         final JwtResponse token = authService.login(authRequest);
         return ResponseEntity.ok(token);
     }
+
+    @PostMapping("reg")
+    public User registration(@RequestBody User user) {
+        return authService.registration(user);
+    }
+
 
     @PostMapping("token")
     public ResponseEntity<JwtResponse> getNewAccessToken(@RequestBody RefreshJwtRequest request) {
